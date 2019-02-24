@@ -1,33 +1,65 @@
-import { FETCHING, ERROR, FETCHED } from "../actions"
+import {
+  FETCHING_NOTES,
+  ERROR_NOTES,
+  FETCHED_NOTES,
+  FETCHING_NOTE,
+  ERROR_NOTE,
+  FETCHED_NOTE
+} from "../actions"
 
 const initialState = {
   notes: [],
-  fetching: false,
-  error: ""
+  currentNote: {},
+  fetchingNotes: false,
+  errorNotes: "",
+  fetchingNote: false,
+  errorNote: ""
 }
 
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case FETCHING:
+    case FETCHING_NOTES:
       return {
         ...state,
-        fetching: true,
-        error: ""
+        fetchingNotes: true,
+        errorNotes: ""
       }
 
-    case ERROR:
+    case ERROR_NOTES:
       return {
         ...state,
-        fetching: false,
-        error: action.payload
+        fetchingNotes: false,
+        errorNotes: action.payload
       }
 
-    case FETCHED:
+    case FETCHED_NOTES:
       return {
         ...state,
-        fetching: false,
-        error: "",
+        fetchingNotes: false,
+        errorNotes: "",
         notes: action.payload
+      }
+
+    case FETCHING_NOTE:
+      return {
+        ...state,
+        fetchingNote: true,
+        errorNote: ""
+      }
+
+    case ERROR_NOTE:
+      return {
+        ...state,
+        fetchingNote: false,
+        errorNote: action.payload
+      }
+
+    case FETCHED_NOTE:
+      return {
+        ...state,
+        fetchingNote: false,
+        errorNote: "",
+        currentNote: action.payload
       }
 
     default:

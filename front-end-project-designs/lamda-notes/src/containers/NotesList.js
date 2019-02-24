@@ -1,13 +1,14 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import { Link } from "react-router-dom"
 
-import { fetchCards } from "../store/actions"
+import { fetchNotes } from "../store/actions"
 import Note from "../components/Note"
 import { NotesWrapper } from "../styles/noteStyles"
 
-class CardsList extends Component {
+class NotesList extends Component {
   componentDidMount = () => {
-    this.props.fetchCards()
+    this.props.fetchNotes()
   }
 
   render() {
@@ -15,7 +16,9 @@ class CardsList extends Component {
       <NotesWrapper>
         <h3>Your Notes:</h3>
         {this.props.notes.map(note => (
-          <Note note={note} />
+          <Link to={`/note/${note._id}`} key={note._id}>
+            <Note note={note} />
+          </Link>
         ))}
       </NotesWrapper>
     )
@@ -24,11 +27,13 @@ class CardsList extends Component {
 
 const mapStateToProps = state => {
   return {
-    notes: state.notes
+    notes: state.notes,
+    fetchingNotes: state.fetchingNotes,
+    errorNotes: state.errorNotes
   }
 }
 
 export default connect(
   mapStateToProps,
-  { fetchCards }
-)(CardsList)
+  { fetchNotes }
+)(NotesList)
