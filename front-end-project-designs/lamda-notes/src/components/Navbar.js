@@ -8,7 +8,7 @@ const Navbar = () => {
     <NavWrapper>
       <h1>Lambda Notes</h1>
       <NavLink to="/">View Your Notes</NavLink>
-      <NavLink to="/">+ Create New Note</NavLink>
+      <NavLink to="/note/add">+ Create New Note</NavLink>
     </NavWrapper>
   )
 }

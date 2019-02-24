@@ -4,7 +4,10 @@ import {
   FETCHED_NOTES,
   FETCHING_NOTE,
   ERROR_NOTE,
-  FETCHED_NOTE
+  FETCHED_NOTE,
+  CREATING,
+  CREATING_ERROR,
+  CREATED
 } from "../actions"
 
 const initialState = {
@@ -13,7 +16,9 @@ const initialState = {
   fetchingNotes: false,
   errorNotes: "",
   fetchingNote: false,
-  errorNote: ""
+  errorNote: "",
+  creating: false,
+  creating_error: ""
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -60,6 +65,27 @@ export default function rootReducer(state = initialState, action) {
         fetchingNote: false,
         errorNote: "",
         currentNote: action.payload
+      }
+
+    case CREATING:
+      return {
+        ...state,
+        creating: true,
+        creating_error: ""
+      }
+
+    case CREATING_ERROR:
+      return {
+        ...state,
+        creating: false,
+        creating_error: action.payload
+      }
+
+    case CREATED:
+      return {
+        ...state,
+        creating: false,
+        creating_error: ""
       }
 
     default:

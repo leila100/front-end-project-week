@@ -29,6 +29,13 @@ export const NoteWrapper = styled.div`
   margin-bottom: 22px;
   padding: 10px 7%;
   background-color: white;
+
+  p {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+  }
 `
 
 export const Title = styled.div`
