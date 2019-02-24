@@ -32,3 +32,15 @@ export const NavWrapper = styled.div`
     line-height: 31px;
   }
 `
+
+export const LinkWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  width: 9%;
+  font-size: 1.7rem;
+  justify-content: space-between;
+  position: relative;
+  top: 18px;
+  right: 0;
+  left: 87%;
+`

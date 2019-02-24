@@ -17,14 +17,18 @@ export const NotesWrapper = styled.div`
     line-height: 21px;
     margin-top: 8px;
   }
+
+  a {
+    width: 32.3%;
+  }
 `
 
 export const NoteWrapper = styled.div`
   border: 1px solid #cbcbcb;
-  margin-right: 16px;
+  margin-right: 11px;
   margin-bottom: 22px;
-  padding: 10px 2%;
-  width: 30%;
+  padding: 10px 7%;
+  background-color: white;
 `
 
 export const Title = styled.div`
@@ -32,4 +36,20 @@ export const Title = styled.div`
   border-bottom: 1px solid #cbcbcb;
   padding: 1px 2%;
   font-size: 2rem;
+`
+
+export const NoteViewWrapper = styled.div`
+  margin-left: 28.3%;
+  margin-right: 5%;
+
+  h3 {
+    margin-top: 36px;
+    font-size: 2.1rem;
+  }
+
+  p {
+    font-size: 1.6rem;
+    margin-top: 23px;
+    line-height: 25px;
+  }
 `
