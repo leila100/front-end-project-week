@@ -7,7 +7,13 @@ import {
   FETCHED_NOTE,
   CREATING,
   CREATING_ERROR,
-  CREATED
+  CREATED,
+  EDITING,
+  EDITING_ERROR,
+  EDITED,
+  DELETING,
+  DELETING_ERROR,
+  DELETED
 } from "../actions"
 
 const initialState = {
@@ -18,7 +24,11 @@ const initialState = {
   fetchingNote: false,
   errorNote: "",
   creating: false,
-  creating_error: ""
+  creating_error: "",
+  editing: false,
+  editing_error: "",
+  deleting: false,
+  deleting_error: ""
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -27,14 +37,24 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         fetchingNotes: true,
-        errorNotes: ""
+        errorNotes: "",
+        fetchingNote: false,
+        errorNote: "",
+        creating: false,
+        creating_error: "",
+        currentNote: {}
       }
 
     case ERROR_NOTES:
       return {
         ...state,
         fetchingNotes: false,
-        errorNotes: action.payload
+        errorNotes: action.payload,
+        fetchingNote: false,
+        errorNote: "",
+        creating: false,
+        creating_error: "",
+        currentNote: {}
       }
 
     case FETCHED_NOTES:
@@ -42,7 +62,12 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         fetchingNotes: false,
         errorNotes: "",
-        notes: action.payload
+        notes: action.payload,
+        fetchingNote: false,
+        errorNote: "",
+        creating: false,
+        creating_error: "",
+        currentNote: {}
       }
 
     case FETCHING_NOTE:
@@ -71,7 +96,8 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         creating: true,
-        creating_error: ""
+        creating_error: "",
+        currentNote: {}
       }
 
     case CREATING_ERROR:
@@ -88,6 +114,47 @@ export default function rootReducer(state = initialState, action) {
         creating_error: ""
       }
 
+    case EDITING:
+      return {
+        ...state,
+        editing: true,
+        editing_error: ""
+      }
+
+    case EDITING_ERROR:
+      return {
+        ...state,
+        editing: false,
+        editing_error: action.payload
+      }
+
+    case EDITED:
+      return {
+        ...state,
+        editing: false,
+        editing_error: ""
+      }
+
+    case DELETING:
+      return {
+        ...state,
+        deleting: true,
+        deleting_error: ""
+      }
+
+    case DELETING_ERROR:
+      return {
+        ...state,
+        deleting: false,
+        deleting_error: action.payload
+      }
+
+    case DELETED:
+      return {
+        ...state,
+        deleting: false,
+        deleting_error: ""
+      }
     default:
       return state
   }

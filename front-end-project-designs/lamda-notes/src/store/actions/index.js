@@ -12,6 +12,9 @@ export const CREATED = "CREATED"
 export const EDITING = "EDITING"
 export const EDITED = "EDITED"
 export const EDITING_ERROR = "EDITING_ERROR"
+export const DELETING = "DELETING"
+export const DELETED = "DELETED"
+export const DELETING_ERROR = "DELETING_ERROR"
 
 export function fetchNotes() {
   return dispatch => {
@@ -72,6 +75,24 @@ export function editNote(note, id, history) {
         dispatch({
           type: EDITING_ERROR,
           payload: "Can't Create the new Note!"
+        })
+      })
+  }
+}
+
+export function deleteNote(id, history) {
+  return dispatch => {
+    dispatch({ type: DELETING })
+    axios
+      .delete(`https://fe-notes.herokuapp.com/note/delete/${id}`)
+      .then(response => {
+        dispatch({ type: DELETED })
+        history.push("/")
+      })
+      .catch(error => {
+        dispatch({
+          type: DELETING_ERROR,
+          payload: "Can't delete the note!"
         })
       })
   }
