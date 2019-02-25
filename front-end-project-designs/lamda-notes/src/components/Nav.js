@@ -3,10 +3,10 @@ import { Link } from "react-router-dom"
 
 import { LinkWrapper } from "../styles/navbarStyles"
 
-const Nav = () => {
+const Nav = props => {
   return (
     <LinkWrapper>
-      <Link to="/">edit</Link>
+      <Link to={`/note/edit/${props.id}`}>edit</Link>
       <Link to="/">delete</Link>
     </LinkWrapper>
   )

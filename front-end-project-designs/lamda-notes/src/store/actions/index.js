@@ -9,6 +9,9 @@ export const ERROR_NOTE = "ERROR_NOTE"
 export const CREATING = "CREATING"
 export const CREATING_ERROR = "CREATING_ERROR"
 export const CREATED = "CREATED"
+export const EDITING = "EDITING"
+export const EDITED = "EDITED"
+export const EDITING_ERROR = "EDITING_ERROR"
 
 export function fetchNotes() {
   return dispatch => {
@@ -50,6 +53,24 @@ export function addNote(newNote, history) {
       .catch(error => {
         dispatch({
           type: CREATING_ERROR,
+          payload: "Can't Create the new Note!"
+        })
+      })
+  }
+}
+
+export function editNote(note, id, history) {
+  return dispatch => {
+    dispatch({ type: EDITING })
+    axios
+      .put(`https://fe-notes.herokuapp.com/note/edit/${id}`, note)
+      .then(response => {
+        dispatch({ type: EDITED })
+        history.push(`/note/${id}`)
+      })
+      .catch(error => {
+        dispatch({
+          type: EDITING_ERROR,
           payload: "Can't Create the new Note!"
         })
       })

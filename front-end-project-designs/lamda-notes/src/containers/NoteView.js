@@ -13,7 +13,7 @@ class NoteView extends React.Component {
   render() {
     return (
       <>
-        <Nav />
+        <Nav id={this.props.currentNote._id} />
         <NoteViewWrapper>
           {this.props.fetchingNote && <h2>FEtching the note...</h2>}
           {this.props.errorNote && <h2>{this.props.errorNote}</h2>}

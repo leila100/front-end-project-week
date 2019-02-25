@@ -16,6 +16,10 @@ class App extends Component {
             path="/note/add"
             render={props => <NoteForm {...props} actionType="Add" />}
           />
+          <Route
+            path="/note/edit/:id"
+            render={props => <NoteForm {...props} actionType="Edit" />}
+          />
           <Route path="/note/:id" component={NoteView} />
           <Route exact path="/" component={NotesList} />
         </Switch>
