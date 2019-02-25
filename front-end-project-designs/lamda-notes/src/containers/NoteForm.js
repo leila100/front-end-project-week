@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 
-import { addNote } from "../store/actions"
+import { addNote, editNote, fetchNote } from "../store/actions"
 import { FormWrapper } from "../styles/noteFormStyles"
 
 class NoteForm extends Component {
@@ -13,6 +13,11 @@ class NoteForm extends Component {
         textBody: ""
       }
     }
+  }
+
+  componentDidMount = () => {
+    // Get the current note information
+    this.setState({ noteInfo: this.props.currentNote })
   }
 
   saveInput = event => {
@@ -27,6 +32,12 @@ class NoteForm extends Component {
     event.preventDefault()
     if (this.props.actionType === "Add") {
       this.props.addNote(this.state.noteInfo, this.props.history)
+    } else if (this.props.actionType === "Edit") {
+      this.props.editNote(
+        this.state.noteInfo,
+        this.props.match.params.id,
+        this.props.history
+      )
     }
   }
 
@@ -62,11 +73,12 @@ class NoteForm extends Component {
 const mapStateToProps = state => {
   return {
     creating: state.creating,
-    creating_error: state.creating_error
+    creating_error: state.creating_error,
+    currentNote: state.currentNote
   }
 }
 
 export default connect(
   mapStateToProps,
-  { addNote }
+  { addNote, editNote, fetchNote }
 )(NoteForm)
